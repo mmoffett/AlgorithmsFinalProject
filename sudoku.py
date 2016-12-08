@@ -3,10 +3,10 @@ import random as rand
 import math
 
 
-
+#this makes a random puzzle with values removed to be solved by the rest of the program
 def makePuzzle(size, dif):
-	mat = numpy.zeros((size, size))
-	for i in range(0, 17 + dif):
+	mat = numpy.zeros((size, size))	#make a matrix of the correct size
+	for i in range(0, 17 + dif):	#fill in a number of cells depending on difficulty you want
 		myBool = True
 		row = -1
 		col = -1
@@ -14,16 +14,16 @@ def makePuzzle(size, dif):
 		
 		while(myBool):
 			myBool = False
-			row = rand.randint(0,size - 1)
-			col = rand.randint(0,size - 1)
-			testnum = rand.randint(1, size)
-			if mat[row, col] == 0:
+			row = rand.randint(0,size - 1)		#find a random number for row
+			col = rand.randint(0,size - 1)		#find a random number for col
+			testnum = rand.randint(1, size)		#find a random number for actual value
+			if mat[row, col] == 0:				#check to see if value is in position
 				for x in range(0,size - 1):
-					if mat[x, col] == testnum:
+					if mat[x, col] == testnum:	#check to see if value is valid for column 	
 						myBool = True
-					if mat[row, x] == testnum:
+					if mat[row, x] == testnum:	#check to see if value is valid for row
 						myBool = True
-				for y in range(int(math.floor(row/math.sqrt(size))*math.sqrt(size)), int(math.floor(row/math.sqrt(size))*math.sqrt(size) + 3.0)):	
+				for y in range(int(math.floor(row/math.sqrt(size))*math.sqrt(size)), int(math.floor(row/math.sqrt(size))*math.sqrt(size) + 3.0)):	#check to see if value is valid for square
 					for z in range(int(math.floor(col/math.sqrt(size))*math.sqrt(size)), int(math.floor(col/math.sqrt(size))*math.sqrt(size) + 3.0)):	
 						if mat[y,z] == testnum:
 							myBool = True
