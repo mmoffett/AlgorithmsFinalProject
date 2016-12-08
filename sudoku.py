@@ -18,7 +18,7 @@ def makePuzzle(size, dif):
 			col = rand.randint(0,size - 1)		#find a random number for col
 			testnum = rand.randint(1, size)		#find a random number for actual value
 			if mat[row, col] == 0:				#check to see if value is in position
-				for x in range(0,size - 1):
+				for x in range(0, size):
 					if mat[x, col] == testnum:	#check to see if value is valid for column 	
 						myBool = True
 					if mat[row, x] == testnum:	#check to see if value is valid for row
@@ -37,8 +37,7 @@ def needFillcells(grid, gridsize, i, j):		#this funtion is going to run through 
 
 	for x in range (i, gridsize):
 		for y in range(j, gridsize):
-			if gird[x][y] == 0:
-			#may need to return tuples???
+			if grid[x][y] == 0:
 				return x,y
 				
 	for x in range(0, gridsize):
@@ -50,16 +49,15 @@ def needFillcells(grid, gridsize, i, j):		#this funtion is going to run through 
 	
 	
 def isValid(grid, gridsize, i, j, e):
-
-	rowCheck = all(e != grid[i][x], for x in range(gridsize))	#Cool little hack to check the whole row to see if the row is a valid solution
-	
+	sqrtn = int(math.sqrt(gridsize))
+	rowCheck = all([e != grid[i][x] for x in range(gridsize)])	#Cool little hack to check the whole row to see if the row is a valid solution
 	if rowCheck:
-		columnCheck = all(e != grid[x][j] for x in range(gridsize)
+		columnCheck = all([e != grid[x][j] for x in range(gridsize)])
 		if columnCheck:
-			# finding the top left x,y co-ordinates of the section containing the i,j cell
-			secTopX, secTopY =  secTopX, secTopY = 3 *(i/3), 3 *(j/3)		# may have edge cases and need some math loveing..... Chris and Marissa 
-			for x in range(secTopX, secTopX + 3):
-				for y in range(secTopY, secTopY + 3):
+		# finding the top left x,y co-ordinates of the section containing the i,j cell
+			secTopX, secTopY = sqrtn *math.floor(i/sqrtn), sqrtn *math.floor(j/sqrtn)	# may have edge cases and need some math loveing..... Chris and Marissa 
+			for x in range(int(secTopX), int(secTopX) + sqrtn):
+				for y in range(int(secTopY), int(secTopY) + sqrtn):
 					if grid[x][y] == e:
 						return False
 			return True
@@ -68,7 +66,7 @@ def isValid(grid, gridsize, i, j, e):
 def solver(grid, i = 0, j = 0):
 
 	m,n = grid.shape
-	gridsize = len(m)
+	gridsize = m
 	
 	i, j = needFillcells(grid, gridsize, i, j)
 	if i == -1:
@@ -83,8 +81,8 @@ def solver(grid, i = 0, j = 0):
 	return False
 		
 
-mySud = makePuzzle(9,0)
-print(mySud)
+#mySud = makePuzzle(9,0)
+#print(mySud)
 mySud = makePuzzle(16,0)
 print(mySud)
 #mySud = makePuzzle(20,0)
