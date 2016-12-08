@@ -96,12 +96,13 @@ def BruteForce(gride, i = 0, j = 0):
 		gridesize = m
 		if i ==-1:
 			return True
-		i, j = needFillcells(grid, gridesize, i, j)
-		for e in range(1, gridesize + 1)
-			if isValid(grid, gridesize, i, j, e):
-				grid[i][j] = e
-			else:
-				return True
+		for x in range(gridesize):
+			for y in range(gridsize):
+				i, j = needFillcells(grid, gridesize, i, j)
+				while(i != -1 && j != -1):
+					for e in range(1, gridesize + 1):
+						if isValid(grid, gridesize, i, j, e):
+							grid[i][j] = e
 		return False
 			
 
