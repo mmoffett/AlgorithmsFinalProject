@@ -13,7 +13,7 @@ def makePuzzle(size, dif):
 		row = -1
 		col = -1
 		testnum = -1
-		
+
 		while(myBool):
 			myBool = False
 			row = rand.randint(0,size - 1)		#find a random number for row
@@ -21,22 +21,22 @@ def makePuzzle(size, dif):
 			testnum = rand.randint(1, size)		#find a random number for actual value
 			if mat[row, col] == 0:				#check to see if value is in position
 				for x in range(0, size):
-					if mat[x, col] == testnum:	#check to see if value is valid for column 	
+					if mat[x, col] == testnum:	#check to see if value is valid for column
 						myBool = True
 					if mat[row, x] == testnum:	#check to see if value is valid for row
 						myBool = True
 				for y in range(int(math.floor(row/math.sqrt(size)) * math.sqrt(size)), int(math.floor(row/math.sqrt(size)) * math.sqrt(size) + sqrtn)):	#check to see if value is valid for square
-					for z in range(int(math.floor(col/math.sqrt(size)) * math.sqrt(size)), int(math.floor(col/math.sqrt(size)) * math.sqrt(size) + sqrtn)):	
+					for z in range(int(math.floor(col/math.sqrt(size)) * math.sqrt(size)), int(math.floor(col/math.sqrt(size)) * math.sqrt(size) + sqrtn)):
 						if mat[y,z] == testnum:
 							myBool = True
 			else:
 				myBool = True
 		mat[row, col] = testnum
-		
+
 	return mat
 
 def needFillcells(grid, gridsize, i, j):		#this funtion is going to run through and find the next valid location to fill
-	
+
 	#this is going forward checking from the i, j location to see if it can be filled optimized
 	for x in range (i, gridsize):
 		for y in range(j, gridsize):
@@ -48,9 +48,9 @@ def needFillcells(grid, gridsize, i, j):		#this funtion is going to run through 
 		for y in range(0, gridsize):
 			if grid[x][y] == 0:
 				return x,y
-				
+
 	return -1, -1
-	
+
 #this is going to check to see if the location is a valid place to put a number
 def isValid(grid, gridsize, i, j, e):
 	sqrtn = int(math.sqrt(gridsize)) #this is done to make sure that we go back to the upper left corner coordinates (actually moved later, but this number is what we use)
@@ -60,21 +60,21 @@ def isValid(grid, gridsize, i, j, e):
 
 		if columnCheck:
 		# finding the top left x,y co-ordinates of the section containing the i,j cell use the number found in sqrtn
-			secTopX, secTopY = sqrtn *math.floor(i/sqrtn), sqrtn *math.floor(j/sqrtn) 
+			secTopX, secTopY = sqrtn *math.floor(i/sqrtn), sqrtn *math.floor(j/sqrtn)
 			#going to check the quadren and see if that is ok
-			for x in range(int(secTopX), int(secTopX) + sqrtn):	
-				for y in range(int(secTopY), int(secTopY) + sqrtn):	
+			for x in range(int(secTopX), int(secTopX) + sqrtn):
+				for y in range(int(secTopY), int(secTopY) + sqrtn):
 					if grid[x][y] == e:
 						return False
 			return True
 	return False
-		
+
 def solver(grid, i = 0, j = 0):
 
 	#this is used to pass into all of the functions so we can change board size
 	m,n = grid.shape
 	gridsize = m
-	
+
 	#give me the next coord needing filled
 	i, j = needFillcells(grid, gridsize, i, j)
 	if i == -1:
@@ -89,7 +89,22 @@ def solver(grid, i = 0, j = 0):
 				return True
 			grid[i][j] = 0
 	return False
-		
+
+def BruteForce(gride, i = 0, j = 0):
+
+		m,n = grid.shape
+		gridesize = m
+		if i ==-1:
+			return True
+		i, j = needFillcells(grid, gridesize, i, j)
+		for e in range(1, gridesize + 1)
+			if isValid(grid, gridesize, i, j, e):
+				grid[i][j] = e
+			else:
+				return True
+		return False
+			
+
 
 mySud = makePuzzle(9,0)
 print(mySud)
@@ -101,4 +116,3 @@ solver(mySud)
 print (mySud)
 
 #got it
-
