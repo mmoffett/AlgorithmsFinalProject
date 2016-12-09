@@ -94,16 +94,16 @@ def BruteForce(grid, i = 0, j = 0):
 
 		m,n = grid.shape
 		gridsize = m
-		if i ==-1:
-			return True
+		#if i ==-1:
+		#	return True
 		for x in range(gridsize):
 			for y in range(gridsize):
-				i, j = needFillcells(grid, gridsize, i, j)
 				while(i != -1 and j != -1):
+					i, j = needFillcells(grid, gridsize, i, j)
 					for e in range(1, gridsize + 1):
 						if isValid(grid, gridsize, i, j, e):
 							grid[i][j] = e
-		return False
+		#return False
 		
 
 def makeLists(grid, gridsize):
