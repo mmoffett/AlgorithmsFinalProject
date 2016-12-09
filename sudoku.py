@@ -90,18 +90,18 @@ def solver(grid, i = 0, j = 0):
 			grid[i][j] = 0
 	return False
 
-def BruteForce(gride, i = 0, j = 0):
+def BruteForce(grid, i = 0, j = 0):
 
 		m,n = grid.shape
-		gridesize = m
+		gridsize = m
 		if i ==-1:
 			return True
-		for x in range(gridesize):
+		for x in range(gridsize):
 			for y in range(gridsize):
-				i, j = needFillcells(grid, gridesize, i, j)
-				while(i != -1 && j != -1):
-					for e in range(1, gridesize + 1):
-						if isValid(grid, gridesize, i, j, e):
+				i, j = needFillcells(grid, gridsize, i, j)
+				while(i != -1 and j != -1):
+					for e in range(1, gridsize + 1):
+						if isValid(grid, gridsize, i, j, e):
 							grid[i][j] = e
 		return False
 			
