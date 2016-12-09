@@ -104,9 +104,36 @@ def BruteForce(grid, i = 0, j = 0):
 						if isValid(grid, gridsize, i, j, e):
 							grid[i][j] = e
 		return False
-			
+		
 
+def makeLists(grid, gridsize):
+	mat = numpy.zeros((gridsize, gridsize))
+	for i in range(gridsize):
+		for j in range(gridsize):
+			if grid[i][j] == 0:
+				vals = findPoss(grid, gridsize, i, j)
+			else:
+				vals = []
+			mat[i][j] = vals
+	return mat
 
+def findPoss(grid, gridsize, i, j):
+	mySet = set(range(1,gridsize + 1))
+	for x in range(gridsize):
+		if grid[i][x] != 0:
+			mySet.remove(grid[i][x])
+		if grid[x][j] != 0:
+			mySet.remove(grid[x][j])
+
+	sqrtn = int(math.sqrt(gridsize))
+	for y in range(int(math.floor(row/sqrtn ) * sqrtn ), int(math.floor(row/sqrtn ) * sqrtn  + sqrtn)):	#check to see if value is valid for square
+			for z in range(int(math.floor(col/sqrtn ) * sqrtn ), int(math.floor(col/sqrtn ) * sqrtn  + sqrtn)):
+				if grid[y,z] != 0:
+					mySet.remove(grid[y][z])
+
+	return mySet
+	
+	
 mySud = makePuzzle(9,0)
 print(mySud)
 #mySud = makePuzzle(16,0)
