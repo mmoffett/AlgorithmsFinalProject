@@ -143,4 +143,4 @@ print(mySud)
 solver(mySud)
 print (mySud)
 
-#got it
+#2x2 with solution: [[ 2,  0,  0,  1],[ 0,  4,  0,  0], [ 4,  2,  1,  0], [ 0,  1,  0,  0]] 
